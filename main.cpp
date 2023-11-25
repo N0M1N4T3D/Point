@@ -10,11 +10,11 @@ public:
     int set_y(int y){
         this->y = y;
     }
-    void get_x(){
-        std::cout << "x: " << this->x << "\n";
+    int get_x(){
+        return this->x;
     }
-    void get_y(){
-        std::cout << "y: " << this->y << "\n";
+    int get_y(){
+        return this->y;
     }
 protected:
     int x,y;
@@ -27,8 +27,8 @@ public:
     int set_z(int z){
         this->z = z;
     }
-    void get_z(){
-        std::cout << "z: " << this->z << "\n";
+    int get_z(){
+        return this->z;
     }
 protected:
     int z;
@@ -48,11 +48,52 @@ public:
     }
 };
 
+class H{
+public:
+    int set_h(double h){
+        this->h = h;
+    }
+    int get_h(){
+        return h;
+    }
+protected:
+    double h;
+};
+
+class Point3Dh: public Point2D, Z, H{
+public:
+    Point3Dh(){}
+    Point3Dh(int x, int y, int z, double h){
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->h = h;
+    }
+    Point3Dh(int x, int y, int z){
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->h = 0;
+    }
+
+    void get_info(){
+        if (h != 0){
+            std::cout << "x: " << x / h << " y: " << y / h << " z: " << z / h << '\n';
+        }
+        else{
+            std::cout << "x: " << x << " y: " << y << " z: " << z << '\n';
+        }
+    }
+};
+
 int main() {
     Point3D p1(10,42,52), p2(10,10,10), p3(4,1,5),p4(0,9,3);
+    Point3Dh a, b(p1.get_x(), p1.get_y(), p1.get_z(), 0.05), c(p2.get_x(), p2.get_y(), p2.get_z());
     p1.get_info();
+    b.get_info();
     p2.get_info();
+    c.get_info();
     p3.get_info();
-    p4.get_info();
+
     return 0;
 }
